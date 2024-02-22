@@ -1,0 +1,7 @@
+
+streamlit
+matplotlib.pyplot
+seaborn
+bs4
+pandas
+json
