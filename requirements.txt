@@ -1,7 +1,6 @@
-mysql
+pymysql
 streamlit
 matplotlib
 seaborn
 bs4
 pandas
-driver = "pymysql"
