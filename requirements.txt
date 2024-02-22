@@ -1,4 +1,4 @@
-pymysql
+mysql
 streamlit
 matplotlib
 seaborn
