@@ -104,6 +104,26 @@ def scrape_imdb_top_series():
     return df_series
 
 def main():
+    
+    page_bg_img=""" 
+    <style>
+    [data-testid="stAppViewContainer"] {
+    background-image: url("https://images.unsplash.com/photo-1505775561242-727b7fba20f0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: cover;
+    }
+    
+
+    [data-testid="stHeader"] {
+    background-color: rgba(0, 0, 0, 0);
+    }
+
+    [data-testid="stToolbar"] {
+    right: 2rem
+    }
+    </style>
+    """
+
+    st.markdown(page_bg_img, unsafe_allow_html=True)
     st.title('IMDB Scraper')
 
     # Option to select movies or TV series
