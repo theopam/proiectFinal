@@ -3,10 +3,9 @@ from bs4 import BeautifulSoup
 import os
 import sys
 import json
-import mysql.connector
+import pymysql  # Change the import statement
 import pandas as pd
 from pathlib import Path
-
 
 # Add the parent directory to sys.path
 current_dir = Path(__file__).resolve().parent
@@ -62,31 +61,30 @@ def scrape_series():
 
 def create_db():
 
-    # Load data from the Excel file
-    excel_file_path = r'/Users/theo/Documents/VScode/notepad++files/PYTHON/proiectgit2/WebScrapingIMDB-Python/imdb_top_movies.xlsx'
-    #df = pd.read_excel(excel_file_path)
     df = scrape_series()
-    #df.fillna({'Title': 'Unknown', 'Runtime': 'Unknown', 'Rated': 'Unknown'}, inplace=True)
-    print(df)
-    
+
     # Table name in your database
     table_name = 'tvseries'
     try:
-        # Conectare la serverul MySQL
-        conn = mysql.connector.connect(
+        # Connect to MySQL server
+        conn = pymysql.connect(
             host="localhost",
             user="root",
-            password="123bujie"
+            password="123bujie",
+            database='filme',
+            charset='utf8mb4',
+            cursorclass=pymysql.cursors.DictCursor
         )
-        print(df)
-        # Creare cursor
-        cursor = conn.cursor()
-        print("Connection succesful")
 
-        # Creare baza de date dacă nu există
+        # Create cursor
+        cursor = conn.cursor()
+
+        # Create database if not exists
         database_name = 'filme'
         cursor.execute(f"CREATE DATABASE IF NOT EXISTS {database_name}")
         cursor.execute(f"USE {database_name}")
+
+        # Create table if not exists
         cursor.execute("""
                        CREATE TABLE IF NOT EXISTS tvseries (
                        id INT AUTO_INCREMENT PRIMARY KEY,
@@ -97,36 +95,27 @@ def create_db():
                        genre VARCHAR(255)
                        )
                 """)
-        print("Table tvseries created successfully.")
+
         for index, row in df.iterrows():
-        
-            
             # Prepare SQL query
             sql = f"INSERT INTO {table_name} (title, period, episodes, rated, genre) VALUES (%s, %s, %s, %s, %s)"
             # Execute query with row values
             cursor.execute(sql, (row['Title'], row['Period'], row['Episodes'], row['Rating'], row['Genre']))
-        
+
         conn.commit()
 
-   
         print(f'Data inserted into the table "{table_name}" successfully.')
     except Exception as ex:
         print(f'An error occurred while inserting data: {ex}')
-    # except Exception as e:
-    #     print(f'Error to create movies table: {e}')
-
-    # except mysql.connector.Error as err:
-    #     print(f"Eroare la crearea bazei de date: {err}")
-
     finally:
-        # Închidere cursor și conexiune
+        # Close cursor and connection
         cursor.close()
         conn.close()
 
 
-    
 if __name__ == "__main__":
    create_db()
+
 
 
 
