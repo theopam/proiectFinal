@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import os
 import sys
 import json
-import pymysql  # Change the import statement
+import pymysql  
 import pandas as pd
 from pathlib import Path
 
@@ -118,10 +118,6 @@ if __name__ == "__main__":
    create_database()
 
 
-
-
-
-   #pyqt5
      
 
 
