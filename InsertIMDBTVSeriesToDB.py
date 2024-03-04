@@ -68,9 +68,9 @@ def create_db():
     try:
         # Connect to MySQL server
         conn = pymysql.connect(
-            host="localhost",
+            host="130.61.179.184",
             user="root",
-            password="123bujie",
+            password="Wn##bZ8n@TYtN8",
             database='filme',
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor
