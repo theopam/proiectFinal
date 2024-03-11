@@ -109,10 +109,10 @@ def create_database():
         print(f'Data inserted into the table "{table_name}" successfully.')
     except Exception as ex:
         print(f'An error occurred while inserting data: {ex}')
-    #finally:
+    finally:
         # Close cursor and connection
-        #cursor.close()
-        #connection.close()
+        cursor.close()
+        connection.close()
 
 if __name__ == "__main__":
    create_database()
