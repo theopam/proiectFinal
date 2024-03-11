@@ -13,7 +13,7 @@ parent_dir = current_dir.parent
 sys.path.append(str(parent_dir))
 
 
-def scrape_movies():
+def scrape_movies(): 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'Accept-Language': 'en-US,en;q=0.5'}
@@ -62,7 +62,7 @@ def scrape_movies():
 
     return df
 
-def create_database():
+def create_database(): 
     df = scrape_movies()
 
     # Table name in your database
@@ -98,7 +98,7 @@ def create_database():
                        )
                 """)
 
-        for index, row in df.iterrows():
+        for index, row in df.iterrows(): # aici functa de mai jos itereaza fiecare linie din data frame
             # Prepare SQL query
             sql = f"INSERT INTO {table_name} (title, year, runtime, rated, genre) VALUES (%s, %s, %s, %s, %s)"
             # Execute query with row values
@@ -114,7 +114,7 @@ def create_database():
         cursor.close()
         connection.close()
 
-if __name__ == "__main__":
+if __name__ == "__main__": # in cazul in care programul este rulat va stii sa ruleze fc data in if, in cazul de fata create_database
    create_database()
 
 
