@@ -1,17 +1,17 @@
-import requests 
-from bs4 import BeautifulSoup 
-import pandas as pd 
-import json 
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import json
 import streamlit as st
 import sys
 import os
-from InsertIMDBMoviesToDB import create_database 
+from InsertIMDBMoviesToDB import create_database
 from InsertIMDBTVSeriesToDB import create_db
 from dataVisualization import visualize_data
 
 
 
-def scrape_imdb_top_movies():  
+def scrape_imdb_top_movies():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'Accept-Language': 'en-US,en;q=0.5'}
@@ -20,11 +20,11 @@ def scrape_imdb_top_movies():
 
     soup = BeautifulSoup(response.content, "html.parser")
 
-    # Extract JSON data from the script tag 
+    # Extract JSON data from the script tag
     json_data = soup.find('script', {'id': '__NEXT_DATA__'}).string
     data = json.loads(json_data)['props']['pageProps']['pageData']['chartTitles']
 
-    # Initialize lists to store movie data 
+    # Initialize lists to store movie data
     titles = []
     release_years = []
     runtimes = []
@@ -54,7 +54,7 @@ def scrape_imdb_top_movies():
         genres.append(genre)
         urls.append(movie_url)
 
-    df = pd.DataFrame({   
+    df = pd.DataFrame({
         'Title': titles,
         'Year': release_years,
         'Runtime': runtimes,
@@ -116,7 +116,7 @@ def scrape_imdb_top_series():
 
     return df_series
 
-def main(): 
+def main():
     # Style for your app
     page_bg_img = """ 
     <style>
@@ -140,7 +140,6 @@ def main():
 
     # Columns for buttons
     col1, col2, col3 = st.columns(3)
-  
  # Initialize session state variables if they don't exist
     if 'df' not in st.session_state:
         st.session_state.df = pd.DataFrame()
@@ -178,7 +177,7 @@ def main():
             for _, row in suggestions.iterrows():
                 st.write(f"Title: {row['Title']}, Rating: {row['Rating']}, URL: {row['URL']}")
 
-    if col2.button('Database Insert'):  # database insertul 
+    if col2.button('Database Insert'):
         with st.spinner('Inserting...'):
             if scrape_option == 'Top Movies':
                 create_database()
