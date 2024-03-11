@@ -109,7 +109,7 @@ def create_database():
         print(f'Data inserted into the table "{table_name}" successfully.')
     except Exception as ex:
         print(f'An error occurred while inserting data: {ex}')
-    finally:
+    #finally:
         # Close cursor and connection
         #cursor.close()
         #connection.close()
