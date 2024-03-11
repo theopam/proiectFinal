@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import os
 import sys
 import json
-import pymysql
+import pymysql  # Change the import statement
 import pandas as pd
 from pathlib import Path
 
@@ -68,9 +68,9 @@ def create_db():
     try:
         # Connect to MySQL server
         conn = pymysql.connect(
-            host="130.61.179.184",
+            host="localhost",
             user="root",
-            password="Wn##bZ8n@TYtN8",
+            password="123bujie",
             database='filme',
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor
