@@ -104,7 +104,7 @@ def create_database():
             # Execute query with row values
             cursor.execute(sql, (row['Title'], row['Year'], row['Runtime'], row['Rating'], row['Genre']))
 
-        connection.commit()
+        conn.commit()
 
         print(f'Data inserted into the table "{table_name}" successfully.')
     except Exception as ex:
@@ -112,7 +112,7 @@ def create_database():
     finally:
         # Close cursor and connection
         cursor.close()
-        connection.close()
+        conn.close()
 
 if __name__ == "__main__": # in cazul in care programul este rulat va stii sa ruleze fc data in if, in cazul de fata create_database
    create_database()
