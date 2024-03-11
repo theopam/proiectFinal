@@ -69,7 +69,7 @@ def create_database():
     table_name = 'movies'
     try:
         # Connect to MySQL server
-        connection = pymysql.connect(
+        conn = pymysql.connect(
             host="130.61.179.184",  # localhost
             user="root",  # root
             password="Wn##bZ8n@TYtN8",
@@ -79,7 +79,7 @@ def create_database():
         )
 
         # Create cursor
-        cursor = connection.cursor()
+        cursor = conn.cursor()
 
         # Create database if not exists
         database_name = 'filme'
