@@ -69,7 +69,7 @@ def create_database():
     table_name = 'movies'
     try:
         # Connect to MySQL server
-        conn = pymysql.connect(
+        connection = pymysql.connect(
             host="130.61.179.184",  # localhost
             user="root",  # root
             password="Wn##bZ8n@TYtN8",
@@ -79,7 +79,8 @@ def create_database():
         )
 
         # Create cursor
-        cursor = conn.cursor()
+        #cursor = conn.cursor()
+        cursor = connection.cursor()
 
         # Create database if not exists
         database_name = 'filme'
@@ -104,7 +105,7 @@ def create_database():
             # Execute query with row values
             cursor.execute(sql, (row['Title'], row['Year'], row['Runtime'], row['Rating'], row['Genre']))
 
-        conn.commit()
+        connection.commit()
 
         print(f'Data inserted into the table "{table_name}" successfully.')
     except Exception as ex:
@@ -112,7 +113,7 @@ def create_database():
     finally:
         # Close cursor and connection
         cursor.close()
-        conn.close()
+        connection.close()
 
 if __name__ == "__main__": # in cazul in care programul este rulat va stii sa ruleze fc data in if, in cazul de fata create_database
    create_database()
