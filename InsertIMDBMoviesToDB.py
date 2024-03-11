@@ -112,7 +112,7 @@ def create_database():
     finally:
         # Close cursor and connection
         #cursor.close()
-        connection.close()
+        #connection.close()
 
 if __name__ == "__main__":
    create_database()
