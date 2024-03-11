@@ -111,7 +111,7 @@ def create_database():
         print(f'An error occurred while inserting data: {ex}')
     finally:
         # Close cursor and connection
-        cursor.close()
+        #cursor.close()
         connection.close()
 
 if __name__ == "__main__":
